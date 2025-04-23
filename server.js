@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes de base
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
  res.json({ message: 'API opérationnelle' });
 });
 
@@ -23,6 +23,23 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
  console.log(`Serveur en écoute sur le port ${PORT}`);
 });
+
+const path = require('path');
+
+// Servir les fichiers React buildés
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// test
+app.get('/api/test', (req, res) => {
+    res.json({ message: "Test OK!" });
+});
+
+
+// Catch-all pour les routes React
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 
 // Données mock pour l'exemple
 let tasks = [
