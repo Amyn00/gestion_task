@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { authService } from '../components/authService';
 
 // Utiliser l'adresse IP locale au lieu de localhost
 const API_URL = 'http://127.0.0.1:5000/api/';
@@ -13,11 +14,15 @@ const apiClient = axios.create({
 
 // Ajouter des intercepteurs pour le débogage
 apiClient.interceptors.request.use(
-  config => {
-    console.log('Requête envoyée:', config);
+  (config) => {
+    const token = authService.getToken(); // Récupérer le token depuis authService
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`; // Ajouter le token dans les en-têtes
+    }
+    console.log('Requête envoyée avec token:', config);
     return config;
   },
-  error => {
+  (error) => {
     console.error('Erreur de requête:', error);
     return Promise.reject(error);
   }
@@ -39,7 +44,12 @@ export const taskService = {
   // Récupérer toutes les tâches
   getAllTasks: async () => {
     try {
-      const response = await apiClient.get('/tasks');
+      const token = authService.getToken(); // Récupérer le token depuis authService
+      const response = await apiClient.get('/tasks', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ajouter le token dans les en-têtes
+        },
+      });
       return response.data;
     } catch (error) {
       console.error('Erreur lors de la récupération des tâches:', error);
@@ -50,7 +60,12 @@ export const taskService = {
   // Récupérer une tâche spécifique
   getTaskById: async (id) => {
     try {
-      const response = await apiClient.get(`/tasks/${id}`);
+      const token = authService.getToken(); // Récupérer le token depuis authService
+      const response = await apiClient.get(`/tasks/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ajouter le token dans les en-têtes
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(`Erreur lors de la récupération de la tâche ${id}:`, error);
@@ -61,7 +76,12 @@ export const taskService = {
   // Ajouter une nouvelle tâche
   createTask: async (taskData) => {
     try {
-      const response = await apiClient.post('/tasks', taskData);
+      const token = authService.getToken(); // Récupérer le token depuis authService
+      const response = await apiClient.post('/tasks', taskData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ajouter le token dans les en-têtes
+        },
+      });
       return response.data;
     } catch (error) {
       console.error('Erreur lors de la création de la tâche:', error);
@@ -72,7 +92,12 @@ export const taskService = {
   // Modifier une tâche existante
   updateTask: async (id, taskData) => {
     try {
-      const response = await apiClient.put(`/tasks/${id}`, taskData);
+      const token = authService.getToken(); // Récupérer le token depuis authService
+      const response = await apiClient.put(`/tasks/${id}`, taskData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ajouter le token dans les en-têtes
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(`Erreur lors de la modification de la tâche ${id}:`, error);
@@ -83,7 +108,12 @@ export const taskService = {
   // Supprimer une tâche
   deleteTask: async (id) => {
     try {
-      const response = await apiClient.delete(`/tasks/${id}`);
+      const token = authService.getToken(); // Récupérer le token depuis authService
+      const response = await apiClient.delete(`/tasks/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ajouter le token dans les en-têtes
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(`Erreur lors de la suppression de la tâche ${id}:`, error);

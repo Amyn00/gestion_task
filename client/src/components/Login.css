@@ -1,0 +1,79 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #0f172a; /* Fond gris foncé */
+}
+
+/* Assurez-vous que les champs input ne dépassent pas la largeur du formulaire */
+.login-form {
+    background: #1e293b; /* Couleur de fond légèrement plus claire */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-sizing: border-box; /* Inclure les bordures et le padding dans la largeur totale */
+  }
+
+h2 {
+  margin-bottom: 1.5rem;
+  color: #ffffff; /* Texte blanc */
+}
+
+.form-group {
+  margin-bottom: 1.5rem; /* Espacement entre les champs */
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #cbd5e1; /* Texte gris clair */
+}
+
+input {
+    width: calc(100% - 2px); /* Ajuster pour éviter de dépasser la largeur */
+    padding: 0.75rem;
+    border: 1px solid #334155; /* Bordure gris foncé */
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #1e293b; /* Fond gris foncé */
+    color: #ffffff; /* Texte blanc */
+    box-sizing: border-box; /* Inclure les bordures et le padding dans la largeur totale */
+  }
+
+input::placeholder {
+  color: #94a3b8; /* Texte des placeholders en gris clair */
+}
+
+input:focus {
+  outline: none;
+  border-color: #3b82f6; /* Bordure bleue au focus */
+  box-shadow: 0 0 4px rgba(59, 130, 246, 0.5); /* Effet lumineux */
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3b82f6; /* Bouton bleu */
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #2563eb; /* Bleu plus foncé au survol */
+}
+
+.error {
+  color: #f87171; /* Rouge clair pour les erreurs */
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

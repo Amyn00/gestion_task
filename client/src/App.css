@@ -33,7 +33,6 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100%; /* Largeur 100% */
 }
 
 /* Titres */
@@ -70,6 +69,32 @@ input:focus {
   box-shadow: 0 0 4px rgba(37, 99, 235, 0.5); /* Ombre bleue */
 }
 
+/* Positionner le bouton de déconnexion dans le coin supérieur droit */
+.logout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #3b82f6; /* Couleur bleue */
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacement entre l'icône et le texte */
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #2563eb; /* Bleu plus foncé au survol */
+}
+
+.logout-button svg {
+  font-size: 1.2rem; /* Taille de l'icône */
+}
+
 /* Boutons globaux */
 button {
   font-size: 1rem;
@@ -80,7 +105,6 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
-  width: 100%; /* Largeur 100% pour les boutons */
   max-width: 300px; /* Limite la largeur maximale */
 }
 
@@ -118,7 +142,6 @@ button:disabled {
   justify-content: space-between;
   align-items: center;
   transition: background-color 0.2s;
-  width: 100%; /* Largeur 100% */
 }
 
 .task-list li:hover {

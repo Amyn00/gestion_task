@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import TaskDetail from './components/TaskDetail';
 import TaskEditForm from './components/TaskEditForm';
+import Login from './components/Login';
+import { AuthContext, AuthProvider } from './contexts/AuthContext';
 import './App.css';
 
-function App() {
+function AppContent() {
+  const { isAuthenticated, logout } = useContext(AuthContext); // Utiliser le contexte d'authentification
   const [tasks, setTasks] = useState([]); // État pour la liste des tâches
   const [view, setView] = useState('list');
   const [selectedTask, setSelectedTask] = useState(null); // Tâche sélectionnée pour édition
@@ -75,11 +78,19 @@ function App() {
     }
   };
 
+  // Si l'utilisateur n'est pas authentifié, afficher un bouton de déconnexion
+  if (!isAuthenticated) {
+    return <Login />;
+  }
+
   return (
     <div className="App">
       {/* En-tête de l'application */}
       <header className="App-header">
         <h1>Gestionnaire de Tâches</h1>
+        <button onClick={logout} className="logout-button">
+          Déconnexion
+        </button>
       </header>
 
       {/* Contenu principal */}
@@ -87,6 +98,14 @@ function App() {
         {renderView()}
       </main>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 
