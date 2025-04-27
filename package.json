@@ -1,10 +1,11 @@
 {
   "name": "api-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "la gestion des taches",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,11 +16,13 @@
     "body-parser": "^2.2.0",
     "bootstrap": "^5.3.5",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "mongoose": "^8.13.2",
+    "mongoose": "^8.14.0",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-data-table-component": "^7.7.0",
     "react-dom": "^19.1.0"
-  }
+  },
+  "type": "module"
 }

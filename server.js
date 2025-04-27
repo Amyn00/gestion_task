@@ -1,7 +1,10 @@
 // server.js - Configuration de base
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+dotenv.config(); // Charger les variables d'environnement
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -16,12 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes de base
 app.get('/', (req, res) => {
- res.json({ message: 'API opérationnelle' });
+  res.json({ message: 'API opérationnelle' });
 });
 
 // Démarrage du serveur
 app.listen(PORT, () => {
- console.log(`Serveur en écoute sur le port ${PORT}`);
+  console.log(`Serveur en écoute sur le port ${PORT}`);
 });
 
 // Données mock pour l'exemple
@@ -31,7 +34,7 @@ let tasks = [
 ];
 
 // Route pour récupérer toutes les tâches
-app.get('/api/tasks', (req, res) => {
+app.get('/api/tasks', (_, res) => { // Removed unused `req`
   res.json(tasks);
 });
 
@@ -57,17 +60,17 @@ app.post('/api/tasks', (req, res) => {
 app.put('/api/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const taskIndex = tasks.findIndex(t => t.id === id);
-  
+
   if (taskIndex === -1) {
     return res.status(404).json({ error: "Tâche non trouvée" });
   }
-  
+
   const updatedTask = {
     id: id,
     title: req.body.title || tasks[taskIndex].title,
     completed: req.body.completed !== undefined ? req.body.completed : tasks[taskIndex].completed
   };
-  
+
   tasks[taskIndex] = updatedTask;
   res.json(updatedTask);
 });
@@ -76,13 +79,13 @@ app.put('/api/tasks/:id', (req, res) => {
 app.delete('/api/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const taskIndex = tasks.findIndex(t => t.id === id);
-  
+
   if (taskIndex === -1) {
     return res.status(404).json({ error: "Tâche non trouvée" });
   }
-  
+
   const deletedTask = tasks[taskIndex];
   tasks.splice(taskIndex, 1);
-  
+
   res.json({ message: "Tâche supprimée avec succès", deletedTask });
 });
